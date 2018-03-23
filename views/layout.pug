@@ -2,12 +2,28 @@ doctype html
 html
 	head
 		title Knowledgebase
+		link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
 	body
-		block content
-		br
-		hr
-		footer
-			p Copyright & copy 2018
+		nav.navbar.navbar-light.bg-light
+			span.navbar-brand.mb-0.h1 Navbar
+			ul.nav.navbar-nav
+				li.nav-item
+					a.nav-link(href='/') Home
+				li.nav-item
+					a.nav-link(href='/articles/add') Add Article
+	
+				
+
+  		
+		.container
+			block content
+			br
+			hr 
+			footer
+				p Copyright & copy 2018
+		script(src='bower_components/jquery/dist/jquery.js')
+		script(src='bower_components/bootstrap/dist/js/bootstrap.js')
+
 
 
 	

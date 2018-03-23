@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+
 //Bring in Models
 let Article = require('./models/article');
 
@@ -24,6 +25,8 @@ db.on('error', () => {
 	console.log(err);
 })
 
+// Set Public folder
+app.use(express.static(path.join(__dirname, 'public')));
 //Load View Engine 
 app.set('views', path.join(__dirname, 'views' ));
 app.set('view engine', 'pug');
@@ -35,7 +38,7 @@ app.get('/', (req, res)=>{
 			console.log(err);
 		} else {
 			res.render("index", {
-		title:'helddlo777',
+		title:'Articles',
 		articles: articles
 	});
 		}
@@ -63,6 +66,17 @@ app.post('/articles/add', (req,res)=> {
 			res.redirect('/');
 		}
 	})
+})
+
+// Get Single Article 
+app.get('/article/:id', (req,res)=>{
+	Article.findById(req.params.id,(err, article)=>{
+		res.render('article', {
+			article:article
+		});
+		return;
+	})
+
 })
 app.listen(3000, ()=>{
 	console.log('the sever started on port 3000')
